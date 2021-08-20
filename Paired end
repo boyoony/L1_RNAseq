@@ -191,7 +191,7 @@ featureCounts \
   --largestOverlap \
   --readExtension3 150 \
   --primary \
-  -s 2 \
+  -s 0 \
   -T 8 \
   ${BAMS}
   
@@ -207,7 +207,7 @@ done
 
 cd /geode2/home/u010/by6/Carbonate
 
-mkdir L1_RNAseq
+mkdir L1_RNAseq_paired 
 	
 
 #Load the singularity module
@@ -242,21 +242,23 @@ cd /N/slate/by6/L1_RNAseq
 
 #Make a folder for SAILOR
 
-mkdir sailor 
+mkdir sailor_paired
 
 
 #Go to aligned directory
 
-cd /N/slate/by6/L1_RNAseq/results/aligned 
+cd /N/slate/by6/L1_RNAseq/results/aligned_paired 
 
 
 # create merged bam file (only if you have multiple replicates) 
 
 module load samtools
 
-samtools merge -@ 8 ../../sailor/SRR953117.2_1_Aligned.sortedByCoord.out.bam SRR953117.2_2_Aligned.sortedByCoord.out.bam
+samtools merge -@ 8 ../../sailor_paired/SRR953117.2_1_Aligned.sortedByCoord.out.bam SRR953117.2_2_Aligned.sortedByCoord.out.bam
 
-samtools merge -@ 8 ../../sailor/SRR953123.2_1_Aligned.sortedByCoord.out.bam SRR953123.2_2_Aligned.sortedByCoord.out.bam
+samtools merge -@ 8 ../../sailor_paired/SRR953123.2_1_Aligned.sortedByCoord.out.bam SRR953123.2_2_Aligned.sortedByCoord.out.bam
+
+samtools merge -@ 8 ../../sailor_paired/SRR953127.2_1_Aligned.sortedByCoord.out.bam SRR953127.2_2_Aligned.sortedByCoord.out.bam
 
 
 #Go to Carbonate 
@@ -266,7 +268,7 @@ cd /geode2/home/u010/by6/Carbonate
 
 #Copy and paste merged bam files 
 
-cp /N/slate/by6/L1_RNAseq/sailor/* .
+cp /N/slate/by6/L1_RNAseq/sailor_paired/* .
 
 
 
@@ -310,6 +312,11 @@ i
 
 # update filenames using arrow keys
 # You can put only one file each. If you have multiple files, perform SAILOR multiple times. 
+#SRR953117.2_1_Aligned.sortedByCoord.out.bam
+#SRR953123.2_1_Aligned.sortedByCoord.out.bam
+#SRR953127.2_1_Aligned.sortedByCoord.out.bam
+#assembly.fasta
+#c.elegans.WS275.snps.sorted.bed
 	
 # save and quit (ESC - shift+ZZ)
 	
